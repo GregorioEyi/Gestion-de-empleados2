@@ -19,21 +19,23 @@ import com.example.entities.Tarea;
 import com.example.paginas.Paginas;
 import com.example.services.Servicios;
 
-@Controller
+@Controller 
+@RequestMapping("/index")
 public class Controlador { 
 
 	private Logger salida = LoggerFactory.getLogger(BorrarApplication.class);
 	
-	@RequestMapping("/index")  
+	@GetMapping(path = "/index2") 
 	public ModelAndView index(Model model) {
 		ModelAndView modelAndView = new ModelAndView(Paginas.index);
+		
 		modelAndView.addObject("empleados", Servicios.getMethod().todosLosEmpleados());
 		modelAndView.addObject("tareas", Servicios.getMethod().todosLasTareas());
 		modelAndView.addObject("empleado", new Empleado());
 		return modelAndView; 
 	}  
 	
-	@RequestMapping("/empleado") 
+	@GetMapping(path = "/empleado") 
 	public ModelAndView empleado(
 				@RequestParam(defaultValue = "1", name = "id", required = false) int id
 								) {
@@ -55,17 +57,22 @@ public class Controlador {
 		return modelAndView;
 	}
 	
-	//@RequestMapping("/hola3")
-/*	@PostMapping("/index")
+	
+	@PostMapping(path = "/index2")
 	public ModelAndView altaEmpleado(Empleado empleado) {
 		ModelAndView modelAndView = new ModelAndView(Paginas.index);
-		salida.info("Empleado que se esta dando de alta: "+empleado.getNombre());
+		salida.warn("Empleado que se esta dando de alta: "+empleado.getNombre());
 		Servicios.getMethod().addEmpleado(empleado);
+		salida.warn("dado de alta: "+empleado.getNombre());
 		modelAndView.addObject("empleados", Servicios.getMethod().todosLosEmpleados());
 		modelAndView.addObject("tareas", Servicios.getMethod().todosLasTareas());
-		//modelAndView.addObject("empleado", Servicios.getMethod().todosLosEmpleados());
+		modelAndView.addObject("empleado", new Empleado());
 		return modelAndView;
-	}*/
+	}
+	
+
+	
+	
 	
 	@RequestMapping("/hola4")
 	public String saludo4() {

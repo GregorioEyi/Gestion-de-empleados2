@@ -31,7 +31,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/index/index2}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/index}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -74,80 +74,14 @@
     </div>
 
     <br>
-    <div id="ContenedorPrincipal">
-        <!--Inicio Contenedor Principal-->
-        <div id="tablaEmpleados" style="display: block;">
-            <h3>Lista de empleados</h3>
-            <table class="table">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Primer Apellido</th>
-                        <th scope="col">Segundo Apellido</th>
-                        <th scope="col">DNI</th>
-                        <th scope="col">Fecha Alta</th>
-                        <th scope="col">Fecha Baja</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody th:each="em : ${empleados}">
-                    <tr>
-                        <th scope="row" th:text="${em.id}"></th>
-                        <td th:text="${em.nombre}"></td>
-                        <td th:text="${em.apellido1}"></td>
-                        <td th:text="${em.apellido2}"></td>
-                        <td th:text="${em.dni}"></td>
-                        <td th:text="${em.alta}"></td>
-                        <td th:text="${em.baja}"></td>
-                        <td>
-                        	<a th:href="@{/index/empleado?id=} + ${em.id}" type="button" class="btn btn-warning" value="1">Ver más</a>
-                          <!-- <button  id="buttonModificarUsuario" type="button" class="btn btn-warning" value="1">Ver más</button> -->
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div id="tablaTareas" style="display:none;">
-            <h3>Lista de tareas</h3>
-            <table class="table">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Fecha Inicio</th>
-                        <th scope="col">Fecha Fin</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody th:each ="ta : ${tareas}">
-                    <tr>
-                        <th scope="row" th:text="${ta.id}">1</th>
-                        <td th:text="${ta.nombre}">Tarea 1</td>
-                        <td th:text="${ta.descripcion}">Descrión tarea 1</td>
-                        <td th:text="${ta.inicio}">Fecha Inicio</td>
-                        <td th:text="${ta.fin}">Fecha Fin</td>
-                        <td>
-                        <button type="button" class="btn btn-warning">Modificar</button>
-                        <button type="button" class="btn btn-danger">Borrar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-
-        <div id="formularioAltaEmpleado" style="display: none;">
+        <div id="formularioAltaEmpleado" style="display: block;">
             <h1>Alta Empleado</h1>
-            <form th:action="@{/index/index2}" method="post" th:object="${empleado}">
+            <form th:action="@{/AltaEmpleado}" method="post" th:object="${empleado}">
                 <div class="form-row">
                 
                     <div class="col-3">
                         <label for="exampleInputEmail1">Nombre</label>
-                        <input th:field="*{nombre}" value="*{nombre}" type="text" class="form-control" placeholder="Nombre Usuario"><br>
+                        <input th:field="*{id}" value="*{id}" type="text" class="form-control" placeholder="Nombre Usuario"><br>
                     </div>
                     
                     <div class="col-3">
@@ -167,35 +101,14 @@
                         <input th:field="*{alta}" value="*{alta}" id="inputFechaAlta" type="date" class="form-control"><br>
                     </div>
                     <div class="col-3">
-                        <label for="exampleInputEmail1">Fecha de Baja</label>
+                        <label for="exampleInputEmail1">Fecha de Alta</label>
                         <input th:field="*{baja}" value="*{baja}" id="inputFechaAlta" type="date" class="form-control"><br>
                     </div>
                     
                 </div>
-                  <button id="guardarCambios" type="submit" class="btn btn-primary">Dar de alta</button>
+                 <button id="guardarCambios" type="submit" class="btn btn-primary">Dar de alta</button>
             </form>
-          
-        </div>
-
-
-        <div id="formularioModificarEmpleado" style="display: none;">
-            <h1>Modificar Empleado</h1>
-        </div>
-
-        <div id="formularioBajaEmpleado" style="display: none;">
-            <h1>Baja Empleado</h1>
-        </div>
-
-        <div id="formularioAltaTarea" style="display: none;">
-            <h1>Alta Tarea</h1>
-        </div>
-
-        <div id="formularioModificarTarea" style="display: none;">
-            <h1>Modificar Tarea</h1>
-        </div>
-
-        <div id="formularioBajaTarea" style="display: none;">
-            <h1>Baja Tarea</h1>
+           
         </div>
 
         <!--Fin Contenedor Principal-->
@@ -229,9 +142,8 @@
             //$("#ContenedorPrincipal").find("div:visible").attr("id"); me busca el div que se muestra actualmente.
             //Boton del dropdown del navbar que muestra el div con el formulario de alta empleado
             $('#dropdownEmpleadosNavBar').find('#altaEmpleado').click(function () {
-                //showAndHide("#formularioAltaEmpleado", '#' + $("#ContenedorPrincipal").find("div:visible").attr("id"));
-                console.log('ha sido clickeado dar de alta');
                 showAndHide("#formularioAltaEmpleado", '#' + $("#ContenedorPrincipal").find("div:visible").attr("id"));
+
             });
             //Boton del dropdown del navbar que muestra el div con el formulario de modificar empleado
             $('#dropdownEmpleadosNavBar').find('#modificarEmpleado').click(function () {
