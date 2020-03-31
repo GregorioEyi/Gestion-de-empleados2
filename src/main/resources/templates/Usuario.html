@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuario</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <link rel="stylesheet" th:href="@{https://www.w3schools.com/w3css/4/w3.css}" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script th:src="@{https://code.jquery.com/jquery-3.4.1.slim.min.js}" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js}" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js}" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+        
+    <!--Scripts para formulario-->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Let´s do it</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/index}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Empleados
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Dar de alta</a>
+                        <a class="dropdown-item" href="#">Modificar</a>
+                        <a class="dropdown-item" href="#">Dar de baja</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Ver empleados</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tareas
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Dar de alta</a>
+                        <a class="dropdown-item" href="#">Modificar</a>
+                        <a class="dropdown-item" href="#">Dar de baja</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Ver tareas</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+<!--  
+    <div id="DatosUsuario" style="display: block;">
+        <div class="jumbotron">
+            <p th:text="${empleado.id}">ID: </p>
+            <p th:text="${empleado.nombre}">Nombre </p>
+            <p th:text="${empleado.apellido1}">primer Apellido: </p>
+            <p th:text="${empleado.apellido2}">Segundo Apellido: </p>
+            <p th:text="${empleado.dni}">DNI:  </p>
+            <p th:text="${empleado.alta}">Fecha atla:  </p>
+            <p th:text="${empleado.baja}">Fecha Baja:  </p>
+        </div>
+        <button id="modficarUsuario" type="button" class="btn btn-warning">Modificar Datos Empleado</button>
+    </div>
+ -->
+    
+ <div class="w3-container jumbotron" id="DatosUsuario" style="display: block;">
+  <h2>Empleado</h2>
+
+  <table class="w3-table-all w3-hoverable" >
+    <thead>
+      <tr class="w3-light-grey">
+        <th>ID</th>
+        <th>NONMBRE</th>
+        <th>APELLIDO 1</th>
+        <th>APELLIDO 2</th>
+        <th>DNI</th>
+        <th>ALTA</th>
+        <th>BAJA</th>
+      </tr>
+    </thead>
+    <tr>
+      <td th:text="${empleado.id}">Jill</td>
+      <td th:text="${empleado.nombre}">Smith</td>
+      <td th:text="${empleado.apellido1}">50</td>
+      <td th:text="${empleado.apellido2}">Jill</td>
+      <td th:text="${empleado.dni}">Smith</td>
+      <td th:text="${empleado.alta}">50</td>
+      <td th:text="${empleado.baja}">50</td>
+    </tr>
+  </table>
+</div>
+
+<div class="w3-container jumbotron" id="DatosUsuario" style="display: block;">
+  <h2>Lista de las tareas del empleado</h2>
+
+  <table class="w3-table-all w3-hoverable" >
+    <thead>
+      <tr class="w3-light-grey">
+        <th>ID</th>
+        <th>NONMBRE</th>
+        <th>DESCRIPCION</th>
+        <th>INICIO</th>
+        <th>FIN</th>
+      </tr>
+    </thead>
+    <tr>
+      <td th:text="${tarea.id}">Jill</td>
+      <td th:text="${tarea.nombre}">Smith</td>
+      <td th:text="${tarea.descripcion}">50</td>
+      <td th:text="${tarea.inicio}">Jill</td>
+      <td th:text="${tarea.fin}">Smith</td>
+    </tr>
+  </table>
+</div>
+    
+
+    <div id="FormularioModificarUsuario" style="display: none;">
+        <form>
+            <div class="form-row">
+                <div class="col-4">
+                    <label for="exampleInputEmail1">Nombre</label>
+                    <input type="text" class="form-control" placeholder="Nombre Usuario"><br>
+                </div>
+                <div class="col-4">
+                    <label for="exampleInputEmail1">Fecha de Alta</label>
+                    <input id="inputFechaAlta" type="date" class="form-control"><br>
+                </div>
+                <div class="col-4">
+                    <label for="exampleInputEmail1">Fecha de Baja</label>
+                    <input id="inputFechaBaja" type="date" class="form-control"><br>
+                    <button id="buttonEmpleadoTrabajaFechaBaja" type="button" class="btn btn-secondary">Trabaja</button>
+                    <button id="buttonEmpleadoNoTrabajaFechaBaja" type="button" class="btn btn-secondary">No Trabaja</button><br>
+                </div>
+                <div class="col-4">
+                    <input type="text" class="form-control" placeholder="Primer Apellido Usuario"><br>
+                </div>
+                <div class="col-4">
+                    <input type="text" class="form-control" placeholder="Segundo Apellido Usuario"><br>
+                </div>
+            </div>
+        </form>
+        <button id="guardarCambios" type="button" class="btn btn-primary">Guardar Cambios</button>
+    </div>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $("#modficarUsuario").click(function () {
+                showAndHide("#FormularioModificarUsuario", "#DatosUsuario");
+            });
+
+            $("#guardarCambios").click(function () {
+                showAndHide("#DatosUsuario", "#FormularioModificarUsuario");
+            });
+
+            $("#buttonEmpleadoTrabajaFechaBaja").click(function () {
+                $("#inputFechaBaja").attr({type:"form-control"});
+                $("#inputFechaBaja").attr({value:"trabajando"});
+                $("#inputFechaBaja").prop( "disabled", true );
+            });
+
+            $("#buttonEmpleadoNoTrabajaFechaBaja").click(function () {
+                $("#inputFechaBaja").attr({type:"date"});
+                $("#inputFechaBaja").attr({value:""});
+                $("#inputFechaBaja").prop( "disabled", false );
+            });
+        });
+
+        function showAndHide(mostrarDivId, ocultarDivId) {
+            $(mostrarDivId).css('display', 'block');
+            $(ocultarDivId).css('display', 'none');
+        }
+
+    </script>
+
+      <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js}" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</body>
+
+</html>

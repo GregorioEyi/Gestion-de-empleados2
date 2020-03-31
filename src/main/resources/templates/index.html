@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <!--   <meta charset="UTF-8"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script th:src="@{https://code.jquery.com/jquery-3.4.1.slim.min.js}" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js}" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js}" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Let´s do it</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/index}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Empleados
+                    </a>
+                    <div id="dropdownEmpleadosNavBar" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a id="altaEmpleado" class="dropdown-item">Dar de alta</a>
+                        <a id="modificarEmpleado" class="dropdown-item">Modificar</a>
+                        <a id="bajaEmpleado" class="dropdown-item">Dar de baja</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" id="verEmpleados">Ver empleados</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tareas
+                    </a>
+                    <div id="dropdownTareasNavBar" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a id="altaTarea" class="dropdown-item">Dar de alta</a>
+                        <a id="modificarTarea" class="dropdown-item">Modificar</a>
+                        <a id="bajaTarea" class="dropdown-item">Dar de baja</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" id="verTareas">Ver tareas</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <div class="jumbotron text-center">
+        <h1>Lets Do It</h1>
+        <p>Gestion de tareas</p>
+        <button id="buttonTablaEmpleados" type="button" class="btn btn-primary">Empleados</button>
+        <button id="buttonTablaTareas" type="button" class="btn btn-secondary">Tareas</button>
+    </div>
+
+    <br>
+    <div id="ContenedorPrincipal">
+        <!--Inicio Contenedor Principal-->
+        <div id="tablaEmpleados" style="display: block;">
+            <h3>Lista de empleados</h3>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Primer Apellido</th>
+                        <th scope="col">Segundo Apellido</th>
+                        <th scope="col">DNI</th>
+                        <th scope="col">Fecha Alta</th>
+                        <th scope="col">Fecha Baja</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody th:each="em : ${empleados}">
+                    <tr>
+                        <th scope="row" th:text="${em.id}"></th>
+                        <td th:text="${em.nombre}"></td>
+                        <td th:text="${em.apellido1}"></td>
+                        <td th:text="${em.apellido2}"></td>
+                        <td th:text="${em.dni}"></td>
+                        <td th:text="${em.alta}"></td>
+                        <td th:text="${em.baja}"></td>
+                        <td>
+                        	<a th:href="@{/empleado?id=} + ${em.id}" type="button" class="btn btn-warning" value="1">Ver más</a>
+                          <!-- <button  id="buttonModificarUsuario" type="button" class="btn btn-warning" value="1">Ver más</button> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="tablaTareas" style="display:none;">
+            <h3>Lista de tareas</h3>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Fecha Inicio</th>
+                        <th scope="col">Fecha Fin</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody th:each ="ta : ${tareas}">
+                    <tr>
+                        <th scope="row" th:text="${ta.id}">1</th>
+                        <td th:text="${ta.nombre}">Tarea 1</td>
+                        <td th:text="${ta.descripcion}">Descrión tarea 1</td>
+                        <td th:text="${ta.inicio}">Fecha Inicio</td>
+                        <td th:text="${ta.fin}">Fecha Fin</td>
+                        <td>
+                        <button type="button" class="btn btn-warning">Modificar</button>
+                        <button type="button" class="btn btn-danger">Borrar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+<!--  
+        <div id="formularioAltaEmpleado" style="display: none;">
+            <h1>Alta Empleado</h1>
+            <form th:action="@{/index}" method="post" th:object="${empleado}">
+                <div class="form-row">
+                
+                    <div class="col-3">
+                        <label for="exampleInputEmail1">Nombre</label>
+                        <input th:field="*{id}" value="*{id}" type="text" class="form-control" placeholder="Nombre Usuario"><br>
+                    </div>
+                    
+                    <div class="col-3">
+                        <label for="exampleInputEmail1">Apellido 1</label>
+                        <input th:field="*{apellido1}" value="*{apellido1}" type="text" class="form-control" placeholder="Primer Apellido Usuario"><br>
+                    </div>
+                    <div class="col-3">
+                        <label for="exampleInputEmail1">Apellido 2</label>
+                        <input th:field="*{apellido2}" value="*{apellido2}" type="text" class="form-control" placeholder="Segundo Apellido Usuario"><br>
+                    </div>
+                     <div class="col-3">
+                        <label for="exampleInputEmail1">DNI</label>
+                        <input th:field="*{dni}" value="*{dni}" type="text" class="form-control" placeholder="Segundo Apellido Usuario"><br>
+                    </div>
+                    <div class="col-3">
+                        <label for="exampleInputEmail1">Fecha de Alta</label>
+                        <input th:field="*{alta}" value="*{alta}" id="inputFechaAlta" type="date" class="form-control"><br>
+                    </div>
+                    <div class="col-3">
+                        <label for="exampleInputEmail1">Fecha de Alta</label>
+                        <input th:field="*{baja}" value="*{baja}" id="inputFechaAlta" type="date" class="form-control"><br>
+                    </div>
+                    
+                </div>
+            </form>
+            <button id="guardarCambios" type="submit" class="btn btn-primary">Dar de alta</button>
+        </div>
+-->
+
+        <div id="formularioModificarEmpleado" style="display: none;">
+            <h1>Modificar Empleado</h1>
+        </div>
+
+        <div id="formularioBajaEmpleado" style="display: none;">
+            <h1>Baja Empleado</h1>
+        </div>
+
+        <div id="formularioAltaTarea" style="display: none;">
+            <h1>Alta Tarea</h1>
+        </div>
+
+        <div id="formularioModificarTarea" style="display: none;">
+            <h1>Modificar Tarea</h1>
+        </div>
+
+        <div id="formularioBajaTarea" style="display: none;">
+            <h1>Baja Tarea</h1>
+        </div>
+
+        <!--Fin Contenedor Principal-->
+    </div>
+    <script>
+        $(document).ready(function () {
+            //Boton que controla mostrar la tabla empleados
+            $("#buttonTablaEmpleados").click(function () {
+                mostrarEmpleados();
+            });
+            //Boton del DropDown que dice ver empleados
+            $('#dropdownEmpleadosNavBar').find('#verEmpleados').click(function () {
+                mostrarEmpleados();
+            });
+            //Boton que controla mostrar la tabla tareas
+            $("#buttonTablaTareas").click(function () {
+                mostrarTareas();
+            });
+            //Boton del dropdown que dice mostrar tareas
+            $('#dropdownTareasNavBar').find('#verTareas').click(function () {
+                mostrarTareas();
+            });
+            //Boton que me lleva a ver las tareas del usuario en una ventana aparte
+            $("#buttonVerTareasUsuario").click(function () {
+                window.open("TareasUsuario.html");
+            });
+            //Boton que me lleva a ver los datos del usuario en una ventana aparte
+            $("#buttonModificarUsuario").click(function () {
+                window.open("Usuario.html");
+            });
+            //$("#ContenedorPrincipal").find("div:visible").attr("id"); me busca el div que se muestra actualmente.
+            //Boton del dropdown del navbar que muestra el div con el formulario de alta empleado
+            $('#dropdownEmpleadosNavBar').find('#altaEmpleado').click(function () {
+                showAndHide("#formularioAltaEmpleado", '#' + $("#ContenedorPrincipal").find("div:visible").attr("id"));
+
+            });
+            //Boton del dropdown del navbar que muestra el div con el formulario de modificar empleado
+            $('#dropdownEmpleadosNavBar').find('#modificarEmpleado').click(function () {
+                showAndHide("#formularioModificarEmpleado", '#' + $("#ContenedorPrincipal").find("div:visible").attr("id"));
+
+            });
+            //Boton del dropdown del navbar que muestra el div con el formulario de baja empleado
+            $('#dropdownEmpleadosNavBar').find('#bajaEmpleado').click(function () {
+                showAndHide("#formularioBajaEmpleado", '#' + $("#ContenedorPrincipal").find("div:visible").attr("id"));
+            });
+            //Boton del dropdown del navbar que muestra el div con el formulario de alta Tarea
+            $('#dropdownTareasNavBar').find('#altaTarea').click(function () {
+                showAndHide("#formularioAltaTarea", '#' + $("#ContenedorPrincipal").find("div:visible").attr("id"));
+            });
+            //Boton del dropdown del navbar que muestra el div con el formulario de modificar Tarea
+            $('#dropdownTareasNavBar').find('#modificarTarea').click(function () {
+                showAndHide("#formularioModificarTarea", '#' + $("#ContenedorPrincipal").find("div:visible").attr("id"));
+            });
+            //Boton del dropdown del navbar que muestra el div con el formulario de baja Tarea
+            $('#dropdownTareasNavBar').find('#bajaTarea').click(function () {
+                showAndHide("#formularioBajaTarea", '#' + $("#ContenedorPrincipal").find("div:visible").attr("id"));
+            });
+        });
+
+        function showAndHide(mostrarDivId, ocultarDivId) {
+            $(mostrarDivId).css('display', 'block');
+            $(ocultarDivId).css('display', 'none');
+        }
+
+        function mostrarEmpleados(){
+            if ($('#ContenedorPrincipal').children(':visible')) {
+                    $('#ContenedorPrincipal').children(':visible').css('display', 'none');
+                }
+                showAndHide("#tablaEmpleados", "");
+        }
+
+        function mostrarTareas(){
+            if ($('#ContenedorPrincipal').children(':visible')) {
+                    $('#ContenedorPrincipal').children(':visible').css('display', 'none');
+                }
+                showAndHide("#tablaTareas", "");
+        }
+
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</body>
+
+</html>
