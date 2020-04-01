@@ -145,7 +145,7 @@
 							class="btn btn-warning">Modificar</a> 
 						<a th:href="@{/home/index/?id=} + ${ta.id}" type="button"
 							class="btn btn-info">Asignar</a> 
-						<a th:href="@{/home/index/?id=} + ${ta.id}" type="button"
+						<a th:href="@{/home/tarea/delete/} + ${ta.id}" type="button"
 							class="btn btn-danger">Borrar</a></td>
 					</tr>
 				</tbody>
@@ -155,7 +155,7 @@
 
 		<div id="formularioAltaEmpleado" style="display: none;">
 			<h1>Alta Empleado</h1>
-			<form th:action="@{/home/index}" method="post"
+			<form th:action="@{/home/empleado/alta}" method="post"
 				th:object="${empleado}">
 				<div class="form-row">
 
@@ -200,7 +200,7 @@
 
 		<div id="formularioAltaTarea" style="display: none;">
 			<h1>Alta Tarea</h1>
-			<form th:action="@{/home/index}" method="post" th:object="${tarea}">
+			<form th:action="@{/home/tarea/alta}" method="post" th:object="${tarea}">
 				<div class="form-row">
 
 					<div class="col-3">

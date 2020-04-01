@@ -127,7 +127,7 @@
 				<td>
 					<button id="idModificaEmpleado" type="button" class="btn btn-info" value="1">Modificar</button></td>
 				<td>
-					<a th:href="@{/home/empleado/?id=} + ${empleado.id}" type="button" class="btn btn-danger" value="1">Borrar</a>
+					<a th:href="@{/home/empleado/delete/} + ${empleado.id}" type="button" class="btn btn-danger" value="1">Borrar</a>
 				</td>
 			</tr>
 		</table>
@@ -162,48 +162,34 @@
 </div>
 
 	<div id="FormularioModificarUsuario" style="display: none;">
-		<form action="" method="put" th:object="${modEmplead}"> <!--   -->
+		<form action="" method="put" th:object="${empleado}"> <!--   -->
 			<div class="form-row">
 				<div class="col-4">
 					<label for="exampleInputEmail1">Nombre</label> 
-					 <input type="text" class="form-control" th:value="${modEmpleado.nombre}" th:placeholder="${modEmpleado.nombre}"><br> 
+					 <input type="text" class="form-control" th:value="${empleado.nombre}" th:placeholder="${empleado.nombre}"><br> 
 					
 				</div>
 				<div class="col-4">
 					<label for="exampleInputEmail1">Apellido1</label> 
-					<input type="text" class="form-control" th:value="${modEmpleado.apellido1}" th:placeholder="${modEmpleado.apellido1}"><br>
+					<input type="text" class="form-control" th:value="${empleado.apellido1}" th:placeholder="${empleado.apellido1}"><br>
 				</div>
 				<div class="col-4">
 					<label for="exampleInputEmail1">Apellido2</label> 
-					<input type="text" class="form-control" th:value="${modEmpleado.apellido2}" th:placeholder="${modEmpleado.apellido2}"><br>
+					<input type="text" class="form-control" th:value="${empleado.apellido2}" th:placeholder="${empleado.apellido2}"><br>
 				</div>
 				<div class="col-4">
 					<label for="exampleInputEmail1">DNI</label> 
-					<input type="text" class="form-control" th:value="${modEmpleado.dni}" th:placeholder="${modEmpleado.dni}"><br>
+					<input type="text" class="form-control" th:value="${empleado.dni}" th:placeholder="${empleado.dni}"><br>
 				</div>
 				<div class="col-4">
 					<label for="exampleInputEmail1">Fecha de Alta</label> 
-					<input id="inputFechaAlta" type="text" class="form-control" th:value="${modEmpleado.alta}" th:placeholder="${modEmpleado.alta}"><br>
+					<input id="inputFechaAlta" type="text" class="form-control" th:value="${empleado.alta}" th:placeholder="${empleado.alta}"><br>
 				</div>
 				<div class="col-4">
 					<label for="exampleInputEmail1">Fecha de Baja</label> 
-					<input id="inputFechaBaja" type="text" class="form-control" th:value="${modEmpleado.baja}" th:placeholder="${modEmpleado.baja}"><br>
-					<!--  <button id="buttonEmpleadoTrabajaFechaBaja" type="button"
-						class="btn btn-secondary">Trabaja</button>
-					<button id="buttonEmpleadoNoTrabajaFechaBaja" type="button"
-						class="btn btn-secondary">No Trabaja</button>
-					<br>-->
+					<input id="inputFechaBaja" type="text" class="form-control" th:value="${empleado.baja}" th:placeholder="${empleado.baja}"><br>
 				</div>
-				
-			<!--<div class="col-4">
-					<input type="text" class="form-control"
-						placeholder="Primer Apellido Usuario"><br>
-				</div>
-				<div class="col-4">
-					<input type="text" class="form-control"
-						placeholder="Segundo Apellido Usuario"><br>
-				</div>-->
-				
+
 			</div>
 		</form>
 		<a id="guardarCambios" type="submit" class="btn btn-primary">Guardar

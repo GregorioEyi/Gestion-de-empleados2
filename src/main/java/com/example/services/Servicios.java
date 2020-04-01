@@ -6,12 +6,13 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.example.BorrarApplication;
 import com.example.entities.Empleado;
 import com.example.entities.Tarea;
-import com.example.repository.Empleado_Repo;
+import com.example.repository.EmpleadoRepo;
 import com.example.repository.Tarea_repo;
 
 @Service
@@ -21,40 +22,42 @@ public class Servicios {
 	
 	private static Servicios servicio;
 	
-	private static Empleado_Repo empl_repo;
+	@Autowired
+	private static EmpleadoRepo empleadoRepo;
 	
+	@Autowired
 	private static Tarea_repo tarea_repo;
 	
 	
-	@Autowired
-	public Servicios(Empleado_Repo empl_repo, Tarea_repo tarea_repo) {
-		this.empl_repo = empl_repo;
+	public Servicios(EmpleadoRepo empl_repo, Tarea_repo tarea_repo) {
+		this.empleadoRepo = empl_repo;
 		this.tarea_repo = tarea_repo;
+		
 	}
 	
 	//-------------------- inicio empleados---------------------//
 
 	public List<Empleado> todosLosEmpleados() {
-		return empl_repo.findAll();
+		return empleadoRepo.findAll();
 	}
 	
 	public Empleado verEmpleado(int id) {
-		Empleado empleado = new Empleado();
-		empl_repo.findById(id);
+		Optional<Empleado> empleado;
+		empleado = empleadoRepo.findById(id);
 		//rellenar el empleado
-		return empleado;
+		return empleado.orElse(null);
 	}
 	
 	public void addEmpleado(Empleado empleado) {
-		empl_repo.save(empleado);
+		empleadoRepo.save(empleado);
 	}
 	
 	public void updateEmpleado(Empleado empleado) {
-		empl_repo.save(empleado);
+		empleadoRepo.save(empleado);
 	}
 	
 	public void deleteEmpleado(int id) {
-		empl_repo.deleteById(id);
+		empleadoRepo.deleteById(id);
 	}
 	
 	//-------------------- fin Empleados---------------------//
@@ -65,10 +68,6 @@ public class Servicios {
 		return tarea_repo.findAll();
 	}
 	
-	public List<Tarea> tareaEmpleado(int id) {
-		List<Tarea> ListaTareasEmpleado = empl_repo.findByEmpleadoTarea(id);
-		return ListaTareasEmpleado;
-	}
 	
 	public void addTarea(Tarea tarea) {
 		tarea_repo.save(tarea);
@@ -90,7 +89,7 @@ public class Servicios {
 	
 	public static Servicios getMethod() {
 		if(servicio == null) {
-			servicio = new Servicios(empl_repo, tarea_repo);
+			servicio = new Servicios(empleadoRepo, tarea_repo);
 		}	
 		return servicio;
 	}

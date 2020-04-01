@@ -2,6 +2,7 @@ package com.example.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -52,14 +53,14 @@ public class Empleado implements Serializable{
 	@JoinTable(name ="empleado_tareas"
 				,joinColumns = @JoinColumn(name="id_Empleado")
 				,inverseJoinColumns = @JoinColumn(name =" id_tarea"))
-	private Set<Tarea> tareas;
+	private List<Tarea> tareas;
 
 	public Empleado() {
 		
 	}
 	
 	public Empleado(int id, String nombre, String apellido1, String apellido2, String dni, String alta, String baja,
-			Set<Tarea> tareas) {
+			List<Tarea> tareas) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -127,11 +128,11 @@ public class Empleado implements Serializable{
 		this.baja = baja;
 	}
 
-	public Set<Tarea> getTareas() {
+	public List<Tarea> getTareas() {
 		return tareas;
 	}
 
-	public void setTareas(Set<Tarea> tareas) {
+	public void setTareas(List<Tarea> tareas) {
 		this.tareas = tareas;
 	}
 
