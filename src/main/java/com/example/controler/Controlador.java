@@ -33,7 +33,7 @@ import com.example.services.Servicios;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 @Controller 
-@RequestMapping("/home")
+@RequestMapping("/home") 
 public class Controlador {    
 
 	private Logger salida = LoggerFactory.getLogger(BorrarApplication.class);
@@ -51,14 +51,15 @@ public class Controlador {
 		modelAndView.addObject("tareas", servicio.todosLasTareas());
 		modelAndView.addObject("empleado", new Empleado());
 		modelAndView.addObject("tarea", new Tarea());
+		//modelAndView.addObject("empleadoModifica", new Empleado());
 		//modelAndView.addObject("asignarTarea", new EmpleadoTarea());
 		return modelAndView; 
 	}  
 	 
 	
-	// ------------------ Ver empleado -------------------------
+	// ------------------ Ver un empleado o una tarea-------------------------
 	
-	@GetMapping(path = "/empleado")  
+	@GetMapping(path = "/empleado")   
 	public ModelAndView empleado(
 				@RequestParam(defaultValue = "1", name = "id", required = false) int id
 								) {
@@ -71,7 +72,23 @@ public class Controlador {
 		
 		modelAndView.addObject("empleado", servicio.verEmpleado(id));
 		modelAndView.addObject("tareas", servicio.verEmpleado(id).getTareas());
-		modelAndView.addObject("modEmpleado", servicio.verEmpleado(id));
+		//modelAndView.addObject("modEmpleado", servicio.verEmpleado(id));
+		//modelAndView.addObject("empleadoModifica", servicio.verEmpleado(id));
+		
+		return modelAndView;
+	}
+	
+	@GetMapping(path = "/tarea")  
+	public ModelAndView tarea(
+				@RequestParam(defaultValue = "1", name = "id", required = false) int id
+								) {
+		salida.warn("ID ENTRANTEs: "+id);  
+		ModelAndView modelAndView = new ModelAndView(Paginas.tarea);
+		
+		Tarea tarea = servicio.verTarea(id);
+		salida.warn("Empleado: " + tarea.getNombre());
+		
+		modelAndView.addObject("tarea", tarea);
 		
 		return modelAndView;
 	}
@@ -105,6 +122,7 @@ public class Controlador {
 		modelAndView.addObject("tareas", Servicios.getMethod().todosLasTareas());
 		modelAndView.addObject("empleado", new Empleado());
 		modelAndView.addObject("tarea", new Tarea());
+		modelAndView.addObject("empleadoModifica", new Empleado());
 		//modelAndView.addObject("asignarTarea", new EmpleadoTarea());
 		return modelAndView;
 	}
@@ -118,10 +136,12 @@ public class Controlador {
 		salida.warn("ID ENTRANTE PARA SER BORRADO: "+ id);
 		servicio.deleteEmpleado(id);
 		salida.warn("USUARIO BORRADO: "+ id);
-		modelAndView.addObject("empleados", servicio.todosLosEmpleados());
-		modelAndView.addObject("tareas", servicio.todosLasTareas());
+		modelAndView.addObject("empleados", Servicios.getMethod().todosLosEmpleados());
+		modelAndView.addObject("tareas", Servicios.getMethod().todosLasTareas());
 		modelAndView.addObject("empleado", new Empleado());
 		modelAndView.addObject("tarea", new Tarea());
+		modelAndView.addObject("empleadoModifica", new Empleado());
+		//modelAndView.addObject("asignarTarea", new EmpleadoTarea());
 		//modelAndView.addObject("asignarTarea", new EmpleadoTarea());
 		return modelAndView;
 	}
@@ -133,27 +153,56 @@ public class Controlador {
 			salida.warn("ID ENTRANTE PARA SER BORRADO: "+ id);
 			servicio.deleteTarea(id);
 			salida.warn("TAREA BORRADO: "+ id);
-			modelAndView.addObject("empleados", servicio.todosLosEmpleados());
-			modelAndView.addObject("tareas", servicio.todosLasTareas());
+			modelAndView.addObject("empleados", Servicios.getMethod().todosLosEmpleados());
+			modelAndView.addObject("tareas", Servicios.getMethod().todosLasTareas());
 			modelAndView.addObject("empleado", new Empleado());
 			modelAndView.addObject("tarea", new Tarea());
+			modelAndView.addObject("empleadoModifica", new Empleado());
+			//modelAndView.addObject("asignarTarea", new EmpleadoTarea());
 			//modelAndView.addObject("asignarTarea", new EmpleadoTarea());
 			
 			return modelAndView;
-		}
-	// ------------------ Actualiza de tareas y empleados ---------------------
-//	@PutMapping(path = "/empleado")
-//	public ModelAndView uptadeEmpleado(@RequestParam(name = "id", defaultValue = "1", required = false) int id) {
-//	
-//		ModelAndView modelAndView = new ModelAndView(Paginas.index);
-//		return modelAndView;
-//	}
+		} 
+		
+	// ------------------ Actualiza de tareas y empleados --------------------- 
+		
+	@PostMapping(path = "/empleado/Update/{id}") //@RequestParam(name = "id", defaultValue = "1", required = false) int id,
+	public ModelAndView uptadeEmpleado(@PathVariable int id,  Empleado empleado) {
+	
+		ModelAndView modelAndView = new ModelAndView(Paginas.index);
+		salida.warn("EMPLEADO QUE SE ESTA MODIFICANDO: "+empleado.getNombre()+ " ID: "+id);
+		empleado.setId(id);
+		servicio.updateEmpleado(empleado);
+		salida.warn("USUARIO MODIFICADO: "+empleado.getNombre());
+		modelAndView.addObject("empleados", servicio.todosLosEmpleados());
+		modelAndView.addObject("tareas", servicio.todosLasTareas());
+		modelAndView.addObject("empleado", new Empleado());
+		modelAndView.addObject("tarea", new Tarea());
+		//modelAndView.addObject("asignarTarea", new EmpleadoTarea());
+		return modelAndView; 
+	}
+		
+	@PostMapping(path = "/tarea/update/{id}") //@RequestParam(name = "id", defaultValue = "1", required = false) int id,
+	public ModelAndView uptadeTarea(@PathVariable int id, Tarea tarea) {
+	
+		ModelAndView modelAndView = new ModelAndView(Paginas.index);
+		salida.warn("TAREA QUE SE ESTÁ MODIFICANDO: "+tarea.getNombre() + " ID: "+id);
+		tarea.setId(id);
+		servicio.updateTarea(tarea);
+		salida.warn("TAREA MODIFICADA: "+tarea.getNombre());
+		modelAndView.addObject("empleados", Servicios.getMethod().todosLosEmpleados());
+		modelAndView.addObject("tareas", Servicios.getMethod().todosLasTareas());
+		modelAndView.addObject("empleado", new Empleado());
+		modelAndView.addObject("tarea", new Tarea());
+		//modelAndView.addObject("asignarTarea", new EmpleadoTarea());
+		return modelAndView;
+	}
 	
 	
 	// ------------------ Asignar tarea a un empleado -------------------------
 	
 	
-/*	@PostMapping(path = "/index")
+/*	@PostMapping(path = "/index") //revisar luego
 	public ModelAndView altaTarea(@RequestParam(name = "id", defaultValue = "1", required = false) int id) {
 		ModelAndView modelAndView = new ModelAndView(Paginas.index);
 		salida.warn("Se esta asignando"+tarea.getNombre());

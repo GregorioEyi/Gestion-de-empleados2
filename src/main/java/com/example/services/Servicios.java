@@ -13,7 +13,7 @@ import com.example.BorrarApplication;
 import com.example.entities.Empleado;
 import com.example.entities.Tarea;
 import com.example.repository.EmpleadoRepo;
-import com.example.repository.Tarea_repo;
+import com.example.repository.TareaRepo;
 
 @Service
 public class Servicios {
@@ -24,14 +24,14 @@ public class Servicios {
 	
 	@Autowired
 	private static EmpleadoRepo empleadoRepo;
-	
+
 	@Autowired
-	private static Tarea_repo tarea_repo;
+	private static TareaRepo tareaRepo;
 	
 	
-	public Servicios(EmpleadoRepo empl_repo, Tarea_repo tarea_repo) {
+	public Servicios(EmpleadoRepo empl_repo, TareaRepo tarea_repo) {
 		this.empleadoRepo = empl_repo;
-		this.tarea_repo = tarea_repo;
+		this.tareaRepo = tarea_repo;
 		
 	}
 	
@@ -44,7 +44,6 @@ public class Servicios {
 	public Empleado verEmpleado(int id) {
 		Optional<Empleado> empleado;
 		empleado = empleadoRepo.findById(id);
-		//rellenar el empleado
 		return empleado.orElse(null);
 	}
 	
@@ -65,20 +64,25 @@ public class Servicios {
 	
 	//-------------------- inicio tareas---------------------//
 	public List<Tarea> todosLasTareas() { 
-		return tarea_repo.findAll();
+		return tareaRepo.findAll();
 	}
 	
+	public Tarea verTarea(int id) {
+		Optional<Tarea> tarea;
+		tarea = tareaRepo.findById(id);
+		return tarea.orElse(null);
+	}
 	
 	public void addTarea(Tarea tarea) {
-		tarea_repo.save(tarea);
+		tareaRepo.save(tarea);
 	}
 	
 	public void updateTarea(Tarea tarea) {
-		tarea_repo.save(tarea);
+		tareaRepo.save(tarea);
 	}
 	
 	public void deleteTarea(int id) {
-		tarea_repo.deleteById(id);
+		tareaRepo.deleteById(id);
 	}
 	
 	public void AsignarTarea(int codEmpleado, int codTarea) {
@@ -89,7 +93,7 @@ public class Servicios {
 	
 	public static Servicios getMethod() {
 		if(servicio == null) {
-			servicio = new Servicios(empleadoRepo, tarea_repo);
+			servicio = new Servicios(empleadoRepo, tareaRepo);
 		}	
 		return servicio;
 	}

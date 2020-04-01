@@ -38,8 +38,8 @@
 </head>
 
 <body>
-	
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand" href="#">Let´s do it</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -78,113 +78,37 @@
 		</div>
 	</nav>
 
-<!-- --------------------------- CONTENDOR PRINCIPAL----------------------- -->
-<div id="desaparecer">
-
-<!-- --------------------------- EMPLEADO ----------------------- -->
-	<div class="w3-container jumbotron" id="DatosUsuario"
-		style="display: block;">
-		<h2>Empleado</h2>
-
-		<table class="w3-table-all w3-hoverable">
-			<thead>
-				<tr class="w3-light-grey">
-					<th>ID</th>
-					<th>NONMBRE</th>
-					<th>APELLIDO 1</th>
-					<th>APELLIDO 2</th>
-					<th>DNI</th>
-					<th>ALTA</th>
-					<th>BAJA</th>
-					<th></th>
-					<th></th>
-				</tr>
-			</thead>
-	
-			<tr><!-- method="delete" th:object="${bajaEmpleado}" -->
-				<td th:text="${empleado.id}">Jill</td>
-				<td th:text="${empleado.nombre}">Smith</td>
-				<td th:text="${empleado.apellido1}">50</td>
-				<td th:text="${empleado.apellido2}">Jill</td>
-				<td th:text="${empleado.dni}">Smith</td>
-				<td th:text="${empleado.alta}">50</td>
-				<td th:text="${empleado.baja}">50</td>
-				<td>
-					<button id="idModificaEmpleado" type="button" class="btn btn-info" value="1">Modificar</button></td>
-				<td>
-					<a th:href="@{/home/empleado/delete/} + ${empleado.id}" type="button" class="btn btn-danger" value="1">Borrar</a>
-				</td>
-			</tr>
-		</table>
-	</div>
-
-	<!-- ---------------------------LISTA DE LAS TAREAS DEL EMPLEADO----------------------- -->
-	<div class="w3-container jumbotron" id="DatosUsuario"
-		style="display: block;">
-		<h2>Lista de las tareas del empleado</h2>
-
-		<table class="w3-table-all w3-hoverable">
-			<thead>
-				<tr class="w3-light-grey">
-					<th>ID</th>
-					<th>NONMBRE</th>
-					<th>DESCRIPCION</th>
-					<th>INICIO</th>
-					<th>FIN</th>
-				</tr>
-			</thead>
-			<tbody th:each="ta : ${tareas}">
-				<tr>
-					<td th:text="${ta.id}">Jill</td>
-					<td th:text="${ta.nombre}">Smith</td>
-					<td th:text="${ta.descripcion}">50</td>
-					<td th:text="${ta.inicio}">Jill</td>
-					<td th:text="${ta.fin}">Smith</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-
-</div>
-
+<br>
 <!-- ---------------------------MODIFICA EMPLEADO----------------------- -->
-			<div id="formularioAltaEmpleado" style="display: none;">
+
+
+	<div id="FormularioModificarTarea" style="display: block;">
 		
-			<h1>Modifica Empleado</h1>
+			<h1>Modifica Tarea</h1>
 			
-			<form th:action="@{/home/empleado/Update/} + ${empleado.id}" method="post" th:object="${empleado}">
+			<form th:action="@{/home/tarea/update/} + ${tarea.id}" method="post" th:object="${tarea}">
 				<div class="form-row">
 
 					<div class="col-3">
 						<label for="exampleInputEmail1">Nombre</label> <input
-							th:field="*{nombre}" value="*{nombre}" th:value="${empleado.nombre}"  type="text"
-							class="form-control" th:placeholder="${empleado.nombre}"><br>
+							th:field="*{nombre}" value="*{nombre}" th:value="${tarea.nombre}"  type="text"
+							class="form-control" th:placeholder="${tarea.nombre}"><br>
 					</div>
 
 					<div class="col-3">
-						<label for="exampleInputEmail1">Apellido 1</label> <input
-							th:field="*{apellido1}" value="*{apellido1}" type="text"
-							class="form-control" th:value="${empleado.apellido1}" th:placeholder="${empleado.apellido1}"><br>
+						<label for="exampleInputEmail1">Descripción</label> <input
+							th:field="*{descripcion}" value="*{descripcion}" type="text" class="form-control"
+							th:value="${tarea.descripcion}" th:placeholder="${tarea.descripcion}"><br>
 					</div>
 					<div class="col-3">
-						<label for="exampleInputEmail1">Apellido 2</label> <input
-							th:field="*{apellido2}" value="*{apellido2}" type="text"
-							class="form-control" th:value="${empleado.apellido2}" th:placeholder="${empleado.apellido2}"><br>
+						<label for="exampleInputEmail1">Inicio</label> <input
+							th:field="*{inicio}" value="*{inicio}" id="inputFechaAlta"
+							type="date" class="form-control" th:value="${tarea.inicio}" th:placeholder="${tarea.inicio}"><br>
 					</div>
 					<div class="col-3">
-						<label for="exampleInputEmail1">DNI</label> <input
-							th:field="*{dni}" value="*{dni}" type="text" class="form-control"
-							th:value="${empleado.dni}" th:placeholder="${empleado.dni}"><br>
-					</div>
-					<div class="col-3">
-						<label for="exampleInputEmail1">Fecha de Alta</label> <input
-							th:field="*{alta}" value="*{alta}" id="inputFechaAlta"
-							type="date" class="form-control" th:value="${empleado.alta}" th:placeholder="${empleado.alta}"><br>
-					</div>
-					<div class="col-3">
-						<label for="exampleInputEmail1">Fecha de Baja</label> <input
-							th:field="*{baja}" value="*{baja}" id="inputFechaAlta"
-							type="date" class="form-control" th:value="${empleado.baja}" th:placeholder="${empleado.baja}"><br>
+						<label for="exampleInputEmail1">Fin</label> <input
+							th:field="*{fin}" value="*{fin}" id="inputFechaAlta"
+							type="date" class="form-control" th:value="${tarea.fin}" th:placeholder="${tarea.fin}"><br>
 					</div>
 
 				</div>
@@ -192,27 +116,30 @@
 			</form>
 
 		</div>
-<!-- --------------------------- FIN CONTENDOR PRINCIPAL----------------------- -->
+
 	<script>
 		$(document).ready(function() {
 			
-// 			$('#idModificaEmpleado').click(function() {
-// 				console.log("he sido clicado :)")
-// 				showAndHide('#FormularioModificarUsuario', '#desaparecer');
-// 			});
+			$('#idModificaEmpleado').click(function() {
+				console.log("he sido clicado :)")
+// 				showAndHide('#FormularioModificarUsuario', '#FormularioModificarTarea');
+			});
+		
+			$("#guardarCambios").click(function() {
+				console.log("He sido pulsado :)")
+				//showAndHide("#DatosUsuario", "#FormularioModificarUsuario");
+			});
 		
 			$('#idModificaEmpleado').click(function() {
 				console.log("he sido clicado :)")
-				showAndHide('#formularioAltaEmpleado', '#desaparecer');
+				showAndHide('#FormularioModificarUsuario', '#desaparecer');
 			});
 
 			$("#modficarUsuario").click(function() {
 				showAndHide("#FormularioModificarUsuario", "#DatosUsuario");
 			});
 
-			$("#guardarCambios").click(function() {
-				console.log("He sido clicado :)")
-			});
+			
 
 			$("#buttonEmpleadoTrabajaFechaBaja").click(function() {
 				$("#inputFechaBaja").attr({

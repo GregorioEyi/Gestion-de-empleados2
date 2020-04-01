@@ -12,7 +12,5 @@ import com.example.entities.Tarea;
 @Repository
 public interface EmpleadoRepo extends JpaRepository<Empleado, Integer>{
 
-//	List<Tarea> findAllByTareas_Id(int id);
-	
 }
    

@@ -30,6 +30,7 @@
 </head>
 
 <body>
+
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand" href="#">Let´s do it</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -50,11 +51,7 @@
 					aria-expanded="false"> Empleados </a>
 					<div id="dropdownEmpleadosNavBar" class="dropdown-menu"
 						aria-labelledby="navbarDropdown">
-						<a id="altaEmpleado" class="dropdown-item">Dar de alta</a> <a
-							id="modificarEmpleado" class="dropdown-item">Modificar</a> <a
-							id="bajaEmpleado" class="dropdown-item">Dar de baja</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" id="verEmpleados">Ver empleados</a>
+						<a id="altaEmpleado" class="dropdown-item">Dar de alta</a> 
 					</div></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
@@ -62,11 +59,7 @@
 					aria-expanded="false"> Tareas </a>
 					<div id="dropdownTareasNavBar" class="dropdown-menu"
 						aria-labelledby="navbarDropdown">
-						<a id="altaTarea" class="dropdown-item">Dar de alta</a> <a
-							id="modificarTarea" class="dropdown-item">Modificar</a> <a
-							id="bajaTarea" class="dropdown-item">Dar de baja</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" id="verTareas">Ver tareas</a>
+						<a id="altaTarea" class="dropdown-item">Dar de alta</a>
 					</div></li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
@@ -76,6 +69,8 @@
 			</form>
 		</div>
 	</nav>
+	
+	
 	<div class="jumbotron text-center">
 		<h1>Lets Do It</h1>
 		<p>Gestion de tareas</p>
@@ -83,10 +78,13 @@
 			class="btn btn-primary">Empleados</button>
 		<button id="buttonTablaTareas" type="button" class="btn btn-secondary">Tareas</button>
 	</div>
-
+	
 	<br>
+	
+	<!--Inicio Contenedor Principal-->
 	<div id="ContenedorPrincipal">
-		<!--Inicio Contenedor Principal-->
+		
+		<!-- --------------------------- LISTA EMPLEADOS ----------------------- -->
 		<div id="tablaEmpleados" style="display: block;">
 			<h3>Lista de empleados</h3>
 			<table class="table">
@@ -120,6 +118,7 @@
 			</table>
 		</div>
 
+<!-- ---------------------------LISTA TAREAS----------------------- -->
 		<div id="tablaTareas" style="display: none;">
 			<h3>Lista de tareas</h3>
 			<table class="table">
@@ -141,7 +140,7 @@
 						<td th:text="${ta.inicio}">Fecha Inicio</td>
 						<td th:text="${ta.fin}">Fecha Fin</td>
 						<td>
-						<a th:href="@{/home/index/?id=} + ${ta.id}" type="button"
+						<a th:href="@{/home/tarea?id=} + ${ta.id}" type="button"
 							class="btn btn-warning">Modificar</a> 
 						<a th:href="@{/home/index/?id=} + ${ta.id}" type="button"
 							class="btn btn-info">Asignar</a> 
@@ -152,11 +151,12 @@
 			</table>
 		</div>
 
-
+<!-- --------------------------- ALTA EMPLEADO ----------------------- -->
 		<div id="formularioAltaEmpleado" style="display: none;">
+		
 			<h1>Alta Empleado</h1>
-			<form th:action="@{/home/empleado/alta}" method="post"
-				th:object="${empleado}">
+			
+			<form th:action="@{/home/empleado/alta}" method="post" th:object="${empleado}">
 				<div class="form-row">
 
 					<div class="col-3">
@@ -198,6 +198,7 @@
 
 		</div>
 
+<!-- ---------------------------ALTA TAREA----------------------- -->
 		<div id="formularioAltaTarea" style="display: none;">
 			<h1>Alta Tarea</h1>
 			<form th:action="@{/home/tarea/alta}" method="post" th:object="${tarea}">
@@ -225,29 +226,13 @@
 					</div>
 
 				</div>
-				<button id="guardarCambios" type="submit" class="btn btn-primary">Dar
-					de alta</button>
+				<button id="guardarCambios" type="submit" class="btn btn-primary">Dar de alta</button>
 			</form>
 		</div>
 
-		<div id="formularioModificarEmpleado" style="display: none;">
-			<h1>Modificar Empleado</h1>
-		</div>
-
-		<div id="formularioBajaEmpleado" style="display: none;">
-			<h1>Baja Empleado</h1>
-		</div>
-
-		<div id="formularioModificarTarea" style="display: none;">
-			<h1>Modificar Tarea</h1>
-		</div>
-
-		<div id="formularioBajaTarea" style="display: none;">
-			<h1>Baja Tarea</h1>
-		</div>
-
-		<!--Fin Contenedor Principal-->
 	</div>
+	<!--Fin Contenedor Principal-->
+	
 	<script>
         $(document).ready(function () {
             //Boton que controla mostrar la tabla empleados

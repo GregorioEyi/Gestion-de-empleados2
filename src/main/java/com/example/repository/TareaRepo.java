@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.entities.Tarea;
 
 @Repository
-public interface Tarea_repo extends JpaRepository<Tarea, Integer>{
+public interface TareaRepo extends JpaRepository<Tarea, Integer>{
 
 }
