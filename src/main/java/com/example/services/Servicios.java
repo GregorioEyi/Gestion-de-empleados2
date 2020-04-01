@@ -1,10 +1,14 @@
 package com.example.services;
 
-import java.util.List; 
+import java.util.List;
+import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.BorrarApplication;
 import com.example.entities.Empleado;
 import com.example.entities.Tarea;
 import com.example.repository.Empleado_Repo;
@@ -13,8 +17,9 @@ import com.example.repository.Tarea_repo;
 @Service
 public class Servicios {
 	
-	private static Servicios servicio;
+	private Logger salida = LoggerFactory.getLogger(BorrarApplication.class);
 	
+	private static Servicios servicio;
 	
 	private static Empleado_Repo empl_repo;
 	
@@ -60,12 +65,9 @@ public class Servicios {
 		return tarea_repo.findAll();
 	}
 	
-	public Tarea tarea(int id) {
-		Tarea tarea = new Tarea();
-		tarea_repo.findById(id);
-		//comprobamos si esta en la base de datos con el id entrante
-		//rellenamos la tarea de los datos de la base de datos
-		return tarea;
+	public List<Tarea> tareaEmpleado(int id) {
+		List<Tarea> ListaTareasEmpleado = empl_repo.findByEmpleadoTarea(id);
+		return ListaTareasEmpleado;
 	}
 	
 	public void addTarea(Tarea tarea) {
@@ -80,6 +82,10 @@ public class Servicios {
 		tarea_repo.deleteById(id);
 	}
 	
+	public void AsignarTarea(int codEmpleado, int codTarea) {
+		// db
+	}
+	
 	//-------------------- fin tareas---------------------//
 	
 	public static Servicios getMethod() {
@@ -88,4 +94,6 @@ public class Servicios {
 		}	
 		return servicio;
 	}
+
+
 }

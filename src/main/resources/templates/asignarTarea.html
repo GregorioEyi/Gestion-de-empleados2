@@ -85,168 +85,32 @@
 	</div>
 
 	<br>
-	<div id="ContenedorPrincipal">
-		<!--Inicio Contenedor Principal-->
-		<div id="tablaEmpleados" style="display: block;">
-			<h3>Lista de empleados</h3>
-			<table class="table">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Nombre</th>
-						<th scope="col">Primer Apellido</th>
-						<th scope="col">Segundo Apellido</th>
-						<th scope="col">DNI</th>
-						<th scope="col">Fecha Alta</th>
-						<th scope="col">Fecha Baja</th>
-						<th></th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody th:each="em : ${empleados}">
-					<tr>
-						<th scope="row" th:text="${em.id}"></th>
-						<td th:text="${em.nombre}"></td>
-						<td th:text="${em.apellido1}"></td>
-						<td th:text="${em.apellido2}"></td>
-						<td th:text="${em.dni}"></td>
-						<td th:text="${em.alta}"></td>
-						<td th:text="${em.baja}"></td>
-						<td><a th:href="@{/home/empleado?id=} + ${em.id}"
-							type="button" class="btn btn-warning" value="1">Ver perfil</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
 
-		<div id="tablaTareas" style="display: none;">
-			<h3>Lista de tareas</h3>
-			<table class="table">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Nombre</th>
-						<th scope="col">Descripción</th>
-						<th scope="col">Fecha Inicio</th>
-						<th scope="col">Fecha Fin</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody th:each="ta : ${tareas}">
-					<tr>
-						<th scope="row" th:text="${ta.id}">1</th>
-						<td th:text="${ta.nombre}">Tarea 1</td>
-						<td th:text="${ta.descripcion}">Descrión tarea 1</td>
-						<td th:text="${ta.inicio}">Fecha Inicio</td>
-						<td th:text="${ta.fin}">Fecha Fin</td>
-						<td>
-						<a th:href="@{/home/index/?id=} + ${ta.id}" type="button"
-							class="btn btn-warning">Modificar</a> 
-						<a th:href="@{/home/index/?id=} + ${ta.id}" type="button"
-							class="btn btn-info">Asignar</a> 
-						<a th:href="@{/home/index/?id=} + ${ta.id}" type="button"
-							class="btn btn-danger">Borrar</a></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+	<div class="w3-container jumbotron" id="DatosUsuario"
+		style="display: block;">
+		<h2>Asignar tarea</h2>
 
+		<table class="w3-table-all w3-hoverable">
+			<thead>
+				<tr class="w3-light-grey">
+					<th>ID</th>
+					<th>NONMBRE</th>
+					<th>DESCRIPCION</th>
+					<th>INICIO</th>
+					<th>FIN</th>
+				</tr>
+			</thead>
+			<tr>
+				<td th:text="${asignarTarea.id}">Jill</td>
+				<td th:text="${asignarTarea.nombre}">Smith</td>
+				<td th:text="${asignarTarea.descripcion}">50</td>
+				<td th:text="${asignarTarea.inicio}">Jill</td>
+				<td th:text="${asignarTarea.fin}">Smith</td>
+			</tr>
+		</table>
+	</div>
 
-		<div id="formularioAltaEmpleado" style="display: none;">
-			<h1>Alta Empleado</h1>
-			<form th:action="@{/home/index}" method="post"
-				th:object="${empleado}">
-				<div class="form-row">
-
-					<div class="col-3">
-						<label for="exampleInputEmail1">Nombre</label> <input
-							th:field="*{nombre}" value="*{nombre}" type="text"
-							class="form-control" placeholder="Nombre Usuario"><br>
-					</div>
-
-					<div class="col-3">
-						<label for="exampleInputEmail1">Apellido 1</label> <input
-							th:field="*{apellido1}" value="*{apellido1}" type="text"
-							class="form-control" placeholder="Primer Apellido Usuario"><br>
-					</div>
-					<div class="col-3">
-						<label for="exampleInputEmail1">Apellido 2</label> <input
-							th:field="*{apellido2}" value="*{apellido2}" type="text"
-							class="form-control" placeholder="Segundo Apellido Usuario"><br>
-					</div>
-					<div class="col-3">
-						<label for="exampleInputEmail1">DNI</label> <input
-							th:field="*{dni}" value="*{dni}" type="text" class="form-control"
-							placeholder="Segundo Apellido Usuario"><br>
-					</div>
-					<div class="col-3">
-						<label for="exampleInputEmail1">Fecha de Alta</label> <input
-							th:field="*{alta}" value="*{alta}" id="inputFechaAlta"
-							type="date" class="form-control"><br>
-					</div>
-					<div class="col-3">
-						<label for="exampleInputEmail1">Fecha de Baja</label> <input
-							th:field="*{baja}" value="*{baja}" id="inputFechaAlta"
-							type="date" class="form-control"><br>
-					</div>
-
-				</div>
-				<button id="guardarCambios" type="submit" class="btn btn-primary">Dar
-					de alta</button>
-			</form>
-
-		</div>
-
-		<div id="formularioAltaTarea" style="display: none;">
-			<h1>Alta Tarea</h1>
-			<form th:action="@{/home/index}" method="post" th:object="${tarea}">
-				<div class="form-row">
-
-					<div class="col-3">
-						<label for="exampleInputEmail1">Nombre</label> <input
-							th:field="*{nombre}" value="*{nombre}" type="text"
-							class="form-control" placeholder="Nombre de la tarea"><br>
-					</div>
-
-					<div class="col-3">
-						<label for="exampleInputEmail1">Descripción</label> <input
-							th:field="*{descripcion}" value="*{descripcion}" type="text"
-							class="form-control" placeholder="Descripción de la tarea"><br>
-					</div>
-					<div class="col-3">
-						<label for="exampleInputEmail1">Inicio</label> <input
-							th:field="*{inicio}" value="*{inicio}" type="date"
-							class="form-control"><br>
-					</div>
-					<div class="col-3">
-						<label for="exampleInputEmail1">Fin</label> <input
-							th:field="*{fin}" value="*{fin}" type="date" class="form-control"><br>
-					</div>
-
-				</div>
-				<button id="guardarCambios" type="submit" class="btn btn-primary">Dar
-					de alta</button>
-			</form>
-		</div>
-
-		<div id="formularioModificarEmpleado" style="display: none;">
-			<h1>Modificar Empleado</h1>
-		</div>
-
-		<div id="formularioBajaEmpleado" style="display: none;">
-			<h1>Baja Empleado</h1>
-		</div>
-
-		<div id="formularioModificarTarea" style="display: none;">
-			<h1>Modificar Tarea</h1>
-		</div>
-
-		<div id="formularioBajaTarea" style="display: none;">
-			<h1>Baja Tarea</h1>
-		</div>
-
-		<!--Fin Contenedor Principal-->
+	<!--Fin Contenedor Principal-->
 	</div>
 	<script>
         $(document).ready(function () {

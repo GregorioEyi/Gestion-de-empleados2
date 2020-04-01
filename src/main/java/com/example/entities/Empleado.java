@@ -32,7 +32,7 @@ public class Empleado implements Serializable{
 	@Column(name = "nombre", length = 100)
 	private String nombre;
 	
-	@Column(name = "apellido1", length = 100)
+	@Column(name = "apellido1", length = 100) 
 	private String apellido1;
 	
 	@Column(name = "apellido2", length = 100)
@@ -42,10 +42,10 @@ public class Empleado implements Serializable{
 	private String dni;
 	
 	@Column(name = "alta", length = 6)
-	private Date alta;
+	private String alta;
 	
 	@Column(name = "baja", length = 6)
-	private Date baja;
+	private String baja;
 	
 	@JoinColumn(name = "id_Empleado", unique = true)
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -58,7 +58,7 @@ public class Empleado implements Serializable{
 		
 	}
 	
-	public Empleado(int id, String nombre, String apellido1, String apellido2, String dni, Date alta, Date baja,
+	public Empleado(int id, String nombre, String apellido1, String apellido2, String dni, String alta, String baja,
 			Set<Tarea> tareas) {
 		super();
 		this.id = id;
@@ -111,19 +111,19 @@ public class Empleado implements Serializable{
 		this.dni = dni;
 	}
 
-	public Date getAlta() {
+	public String getAlta() {
 		return alta;
 	}
 
-	public void setAlta(Date alta) {
+	public void setAlta(String alta) {
 		this.alta = alta;
 	}
 
-	public Date getBaja() {
+	public String getBaja() {
 		return baja;
 	}
 
-	public void setBaja(Date baja) {
+	public void setBaja(String baja) {
 		this.baja = baja;
 	}
 

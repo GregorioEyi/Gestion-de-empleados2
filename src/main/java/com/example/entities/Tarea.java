@@ -26,17 +26,17 @@ public class Tarea implements Serializable{
 	private String descripcion;
 	
 	@Column(name = "inicio", length = 6)
-	private Date inicio;
+	private String inicio;
 	
 	@Column(name = "fin", length = 6)
-	private Date fin;
+	private String fin;
 	
 	
 	public Tarea() {
 		super();
 	}
 
-	public Tarea(int id, String nombre, String descripcion, Date inicio, Date fin) {
+	public Tarea(int id, String nombre, String descripcion, String inicio, String fin) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -69,19 +69,19 @@ public class Tarea implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	public Date getInicio() {
+	public String getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(Date inicio) {
+	public void setInicio(String inicio) {
 		this.inicio = inicio;
 	}
 
-	public Date getFin() {
+	public String getFin() {
 		return fin;
 	}
 
-	public void setFin(Date fin) {
+	public void setFin(String fin) {
 		this.fin = fin;
 	}
 
